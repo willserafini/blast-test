@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layouts.app')
 
 @section('title', 'Customer Edit')
 
@@ -13,7 +13,7 @@
 
     <div class="row">
         <div class="col-12">
-            <form action="/customers/{{ $customer->id }}" method="POST" class="pb-2">
+            <form action="{{ route('customers.update', ['customer' => $customer]) }}" method="POST" class="pb-2">
                 @method('PATCH')
                 @include('customers.form')
         

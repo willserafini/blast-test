@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layouts.app')
 
 @section('title', 'Customer List')
 
@@ -7,7 +7,7 @@
     <div class="row">
         <div class="col-12">
             <h1>Customer List</h1>
-            <a href="/customers/create">Add new Customer</a>
+            <a href="{{ route('customers.create') }}">Add new Customer</a>
         </div>
     </div>
 

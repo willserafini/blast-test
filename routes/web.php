@@ -16,7 +16,7 @@ use App\Http\Controllers\CustomersController;
 */
 
 Route::view('/', 'home');
-Route::view('contact', 'contact');
+Route::view('contact', 'contact')->name('contact');
 Route::view('about', 'about');
 
 
@@ -35,3 +35,7 @@ Route::delete('customers/{customer}', [CustomersController::class, 'destroy']);
 */
 
 Route::resource('customers', CustomersController::class);
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
