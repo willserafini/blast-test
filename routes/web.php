@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\CustomersController;
 use App\Http\Controllers\NumbersController;
+use App\Http\Controllers\NumberPreferencesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,9 +18,6 @@ use App\Http\Controllers\NumbersController;
 */
 
 Route::view('/', 'home');
-Route::view('contact', 'contact')->name('contact');
-Route::view('about', 'about');
-
 
 /*
 Route::get('customers', [CustomersController::class, 'index']);
@@ -37,6 +35,7 @@ Route::delete('customers/{customer}', [CustomersController::class, 'destroy']);
 
 Route::resource('customers', CustomersController::class);
 Route::resource('numbers', NumbersController::class);
+Route::resource('number_preferences', NumberPreferencesController::class);
 
 Auth::routes();
 

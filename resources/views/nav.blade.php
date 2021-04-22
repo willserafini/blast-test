@@ -17,7 +17,7 @@
                     <a class="nav-link" href="{{ route('numbers.index') }}">Numbers</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('contact') }}">Contact Us</a>
+                    <a class="nav-link" href="{{ route('number_preferences.index') }}">Preferences</a>
                 </li>
                 
             </ul>

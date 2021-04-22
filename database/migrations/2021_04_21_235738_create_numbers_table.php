@@ -17,13 +17,15 @@ class CreateNumbersTable extends Migration
             $table->id()->unique();
 
             $table->unsignedBigInteger('customer_id');
-            //$table->foreign('customer_id')->references('id')->on('customers');
+            $table->foreign('customer_id')->references('id')->on('customers');
 
             $table->string('number', 14);
 
             $table->integer('status')->default(1);
 
             $table->timestamps();
+
+            $table->softDeletes();
         });
     }
 

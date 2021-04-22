@@ -11,12 +11,6 @@ use Illuminate\Support\Facades\Auth;
 class CustomersController extends Controller
 {
 
-    public function __construct()
-    {
-        //$this->middleware('auth')->except('index');
-        $this->middleware('auth');
-    }
-
     public function index() 
     {
         $customers = Customer::all();
@@ -34,15 +28,15 @@ class CustomersController extends Controller
         return view('customers.create', compact('customer'));
     }
 
-    public function store() 
+    public function store(Request $request) 
     {
-        $data = $this->getValidateRequest();
+        $data = $this->getValidateRequest($request);
 
         $data['user_id'] = Auth::id();
 
         Customer::create($data);
 
-        return redirect('customers')->with('message', 'Customer created successfully!');
+        return redirect('customers')->with('success', 'Customer created successfully!');
     }
 
     public function show(Customer $customer) 
@@ -59,27 +53,27 @@ class CustomersController extends Controller
         return view('customers.edit', compact('customer'));
     }
 
-    public function update(Customer $customer) 
+    public function update(Request $request, Customer $customer) 
     {
-        $data = $this->getValidateRequest();
+        $data = $this->getValidateRequest($request);
 
         $customer->update($data);
 
-        //session()->flash('message', 'Customer was updated!!!');
+        //session()->flash('success', 'Customer was updated!!!');
 
-        return redirect('customers/' . $customer->id)->with('message', 'Customer updated successfully!');
+        return redirect('customers/' . $customer->id)->with('success', 'Customer updated successfully!');
     }
 
     public function destroy(Customer $customer)
     {
         $customer->delete();
 
-        return redirect('customers')->with('message', 'Customer deleted successfully!');
+        return redirect('customers')->with('success', 'Customer deleted successfully!');
     }
 
-    private function getValidateRequest() 
+    private function getValidateRequest(Request $request) 
     {
-        return request()->validate([
+        return $request->validate([
             'name'     => 'required|min:3',
             'document' => 'required|min:3|max:12',
             'status'   => 'required',

@@ -17,7 +17,7 @@ class CreateCustomersTable extends Migration
             $table->id()->unique();
 
             $table->unsignedBigInteger('user_id');
-            //$table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users');
             
             $table->string('name');
             
@@ -25,11 +25,7 @@ class CreateCustomersTable extends Migration
             $table->integer('status')->default(1);
             $table->timestamps();
 
-
-            //$table->unsignedInteger('company_id');
-            //$table->string('email');
-
-            
+            $table->softDeletes();
         });
     }
 

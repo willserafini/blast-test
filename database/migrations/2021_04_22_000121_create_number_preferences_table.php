@@ -17,12 +17,13 @@ class CreateNumberPreferencesTable extends Migration
             $table->id()->unique();
 
             $table->unsignedBigInteger('number_id');
-            //$table->foreign('number_id')->references('id')->on('numbers');
+            $table->foreign('number_id')->references('id')->on('numbers');
 
             $table->string('name');
             $table->string('value');
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

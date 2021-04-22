@@ -9,13 +9,7 @@ use App\Models\Number;
 use App\Models\Customer;
 
 class NumbersController extends Controller
-{
-
-    public function __construct()
-    {
-        //$this->middleware('auth')->except('index');
-        $this->middleware('auth');
-    }
+{    
 
     /**
      * Display a listing of the resource.
@@ -61,7 +55,7 @@ class NumbersController extends Controller
 
         Number::create($data);
 
-        return redirect('numbers')->with('message', 'Number created successfully!');
+        return redirect('numbers')->with('success', 'Number created successfully!');
     }
 
     /**
@@ -99,7 +93,7 @@ class NumbersController extends Controller
         $data = $this->getValidateRequest($request);
         $number->update($data);
 
-        return redirect('numbers/' . $number->id)->with('message', 'Number updated successfully!');
+        return redirect('numbers/' . $number->id)->with('success', 'Number updated successfully!');
     }
 
     /**
@@ -112,7 +106,7 @@ class NumbersController extends Controller
     {
         $number->delete();
 
-        return redirect('numbers')->with('message', 'Number deleted successfully!');
+        return redirect('numbers')->with('success', 'Number deleted successfully!');
     }
 
     private function getValidateRequest(Request $request) 

@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'VaiTel') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -28,13 +28,8 @@
 
         <main class="py-4">
             <div class="container">
-                @if (session()->has('message'))
 
-                    <div class="alert alert-success" role="alert">
-                        <strong>Success!</strong> {{ session()->get('message') }}
-                    </div>
-                    
-                @endif
+                @include('flash-message')
 
                 @yield('content')
             </div>
