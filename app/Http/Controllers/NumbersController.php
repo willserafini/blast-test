@@ -22,13 +22,18 @@ class NumbersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $numbers = Number::paginate(10);
+        $filter = $request->query('number');
 
-        //dd($numbers);
+        if (!empty($filter)) {
+            $numbers = Number::where('number','LIKE','%' . $filter . '%')
+                ->paginate(10);
+        } else {
+            $numbers = Number::paginate(10);
+        }
     
-        return view('numbers.index', compact('numbers'));
+        return view('numbers.index', compact('numbers', 'filter'));
     }
 
     /**

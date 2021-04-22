@@ -11,8 +11,17 @@
         </div>
     </div>    
 
+    <form class="form-inline" method="GET">
+        <div class="form-group mb-2">
+          <label for="number" class="col-form-label mr-2">Number</label>
+          <input type="text" class="form-control" id="number" name="number" placeholder="Number..." value="{{$filter}}">
+        </div>
+        
+        <button type="submit" class="btn btn-secondary mb-2 ml-2">Filter</button>
+    </form>
+
     <div class="container mt-5">
-        <table class="table table-bordered">
+        <table class="table table-bordered table-hover justify-content-center">
             <thead>
                 <tr class="table-primary">
                     <th scope="col">#</th>
