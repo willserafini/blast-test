@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\CustomersController;
+use App\Http\Controllers\NumbersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +36,7 @@ Route::delete('customers/{customer}', [CustomersController::class, 'destroy']);
 */
 
 Route::resource('customers', CustomersController::class);
+Route::resource('numbers', NumbersController::class);
 
 Auth::routes();
 

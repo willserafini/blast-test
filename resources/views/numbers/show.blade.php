@@ -1,19 +1,19 @@
 @extends('layouts.app')
 
-@section('title', 'Customer Details')
+@section('title', 'Number Details')
 
 @section('content')
 
     <div class="row">
         <div class="col-12">
-            <h1>Customer details</h1>
+            <h1>Number details</h1>
               
             <div class="btn-group" role="group">
-                <a href="{{ route('customers.index') }}"><button type="button" class="btn btn-primary">Costumers List</button></a>
-                <a href="{{ route('customers.edit', ['customer' => $customer]) }}">
+                <a href="{{ route('numbers.index') }}"><button type="button" class="btn btn-primary">Numbers List</button></a>
+                <a href="{{ route('numbers.edit', ['number' => $number]) }}">
                     <button type="button" class="btn btn-primary mx-2">Edit</button>
                 </a>
-                <form action="{{ route('customers.destroy', ['customer' => $customer]) }}" method="POST">
+                <form action="{{ route('numbers.destroy', ['number' => $number]) }}" method="POST">
                     @method('DELETE')
                     
                     <button type="submit" class="btn btn-danger">Delete</button>
@@ -26,9 +26,9 @@
 
     <div class="row mt-3">
         <div class="col-12">
-            <p><strong>Name:</strong> {{$customer->name}}</p>
-            <p><strong>Document:</strong> {{$customer->document}}</p>
-            <p><strong>Status:</strong> {{$customer->status}}</p>
+            <p><strong>Costumer:</strong> {{$number->costumer->name}}</p>
+            <p><strong>Number:</strong> {{$number->number}}</p>
+            <p><strong>Status:</strong> {{$number->status}}</p>
         </div>
     </div>
 

@@ -13,30 +13,45 @@ class Customer extends Model
 
     protected $guarded = [];
 
-    protected $attributes = [
-        'active' => 1
-    ];
+    protected $table = 'customers';
 
-    public function scopeActive($query) {
+    /*protected $attributes = [
+        'active' => 1
+    ];*/
+
+    /*public function scopeActive($query) {
         return $query->where('active', 1);
     }
 
     public function scopeInactive($query) {
         return $query->where('active', 0);
-    }
+    }*/
 
-    public function company() {
+    /*public function company() {
         return $this->belongsTo(Company::Class);
+    }*/
+
+    public function numbers() 
+    {
+        return $this->hasMany(Number::class);
     }
 
-    public function getActiveAttribute($attribute) {
-        return $this->getActiveOptions()[$attribute];
+    public function getStatusAttribute($attribute) 
+    {
+        if (!$attribute) {
+            return '';
+        }
+
+        return $this->getStatusOptions()[$attribute];
     }
 
-    public function getActiveOptions() {
+    public function getStatusOptions() 
+    {
         return [
-            1 => 'Active',
-            0 => 'Inactive',            
+            1 => 'New',
+            2 => 'Active',
+            3 => 'Suspended',
+            4 => 'Cancelled'
         ];
     }
 }

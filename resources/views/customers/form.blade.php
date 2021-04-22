@@ -6,29 +6,20 @@
 <div>{{ $errors->first('name') }}</div>
 
 <div class="form-group mb-3">
-    <span class="form-group-text" id="basic-addon1">Email</span>
-    <input value="{{ old('email') ?? $customer->email }}" type="text" class="form-control" name="email" aria-label="Email" aria-describedby="basic-addon1">
+    <span class="form-group-text" id="basic-addon1">Document</span>
+    <input value="{{ old('document') ?? $customer->document }}" type="text" class="form-control" name="document" aria-label="Document" aria-describedby="basic-addon1">
 </div>
 
-<div>{{ $errors->first('email') }}</div>
+<div>{{ $errors->first('document') }}</div>
 
 <div class="form-group mb-3">
     <span class="form-group-text" id="basic-addon1">Status</span>
-    <select name="active" id="active" class="form-control">
-        <option value="" disabled>Select customer status</option>
+    <select name="status" id="status" class="form-control">
+        <option value="" disabled>Select status</option>
 
-        @foreach ($customer->getActiveOptions() as $key => $value)
-            <option value="{{ $key }}" {{ $customer->active == $value ? 'selected' : '' }}>{{ $value }}</option>
+        @foreach ($customer->getStatusOptions() as $key => $value)
+            <option value="{{ $key }}" {{ $customer->status == $value ? 'selected' : '' }}>{{ $value }}</option>
         @endforeach
-    </select>
-</div>
-
-<div class="form-group mb-3">
-    <span class="form-group-text" id="basic-addon1">Company</span>
-    <select name="company_id" id="active" class="form-control">
-        @foreach ($companies as $company)
-            <option value="{{ $company->id }}">{{ $company->name }}</option>
-        @endforeach                        
     </select>
 </div>
 

@@ -11,17 +11,15 @@
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/">Home</a>
+                    <a class="nav-link" href="{{ route('customers.index') }}">Customers</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/about">About Us</a>
+                    <a class="nav-link" href="{{ route('numbers.index') }}">Numbers</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('contact') }}">Contact Us</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/customers">Customers List</a>
-                </li>
+                
             </ul>
 
             <!-- Right Side Of Navbar -->

@@ -14,12 +14,22 @@ class CreateCustomersTable extends Migration
     public function up()
     {
         Schema::create('customers', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedInteger('company_id');
+            $table->id()->unique();
+
+            $table->unsignedBigInteger('user_id');
+            //$table->foreign('user_id')->references('id')->on('users');
+            
             $table->string('name');
-            $table->string('email');
-            $table->integer('active');
+            
+            $table->string('document', 12);
+            $table->integer('status')->default(1);
             $table->timestamps();
+
+
+            //$table->unsignedInteger('company_id');
+            //$table->string('email');
+
+            
         });
     }
 
