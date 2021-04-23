@@ -19,4 +19,11 @@ class NumberPreference extends Model
         return $this->belongsTo(Number::class, 'number_id');
     }
 
+    public static function getDefaultsPreferences() {
+        return [
+            'auto_attendant'    => 1,
+            'voicemail_enabled' => 1
+        ];
+    }
+
 }

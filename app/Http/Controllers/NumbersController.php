@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 
 use App\Models\Number;
 use App\Models\Customer;
+use App\Models\NumberPreference;
+use Illuminate\Support\Facades\DB;
+use App\Events\NewNumberEvent;
 
 class NumbersController extends Controller
 {    
@@ -50,12 +53,23 @@ class NumbersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {        
+    {       
         $data = $this->getValidateRequest($request);
+        try {
+            DB::beginTransaction();           
 
-        Number::create($data);
+            $number = Number::create($data);
+            
+            event( new NewNumberEvent($number) );
 
-        return redirect('numbers')->with('success', 'Number created successfully!');
+            DB::commit();
+
+            return redirect('numbers')->with('success', 'Number created successfully!');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect('numbers/create')->with('error', $e->getMessage());
+        }
+        
     }
 
     /**

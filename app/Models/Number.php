@@ -19,6 +19,10 @@ class Number extends Model
 
     protected $cascadeDeletes = ['number_preferences'];
 
+    protected $attributes = [
+        'status' => 1
+    ];
+
     public function costumer() 
     {
         return $this->belongsTo(Customer::class, 'customer_id');
