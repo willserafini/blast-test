@@ -6,6 +6,7 @@ use App\Models\NumberPreference;
 use App\Models\Number;
 
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Builder;
 
 class NumberPreferencesController extends Controller
 {
@@ -16,13 +17,14 @@ class NumberPreferencesController extends Controller
      */
     public function index(Request $request)
     {
-        $filter = $request->query('filter');
+        $filter = $request->query();
+        //dd($filter);
 
-        if (!empty($filter)) {
-            //dd($filter);
-            $numberPreferences = NumberPreference::select('number_preferences.*')
-                ->join('numbers', 'numbers.id', '=', 'number_preferences.id')
-                ->where('numbers.number', 'LIKE','%' . $filter . '%')
+        //$numberPreferences = NumberPreference::query();
+        if (!empty($filter['number'])) {
+                $numberPreferences = NumberPreference::whereHas('number', function (Builder $query) use ($filter) {
+                    $query->where('number', 'LIKE', '%' . $filter['number'] . '%');
+                })
                 ->paginate(10);
         } else {
             $numberPreferences = NumberPreference::paginate(10);

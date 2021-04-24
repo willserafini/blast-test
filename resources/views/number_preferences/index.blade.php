@@ -13,7 +13,7 @@
 
     <form class="form-inline" method="GET">
         <div class="form-group mb-2">
-            <input type="text" class="form-control" id="filter" name="filter" placeholder="Number..." value="{{ $filter }}">          
+            <input type="text" class="form-control" id="number" name="number" placeholder="Number..." value="{{ $filter['number'] ?? '' }}">          
         </div>
         
         <button type="submit" class="btn btn-outline-primary mb-2 ml-2">Filter</button>
