@@ -6,7 +6,7 @@
 
     <div class="row">
         <div class="col-12">
-            <h1>Customer Edit {{$customer->name}}</h1>
+            <h1>Customer Edit</h1>
         </div>
     </div>
 

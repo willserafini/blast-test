@@ -29,6 +29,7 @@
             <p><strong>Name:</strong> {{$customer->name}}</p>
             <p><strong>Document:</strong> {{$customer->document}}</p>
             <p><strong>Status:</strong> {{$customer->status}}</p>
+            <p><strong>User:</strong> {{$customer->user->name}}</p>
         </div>
     </div>
 

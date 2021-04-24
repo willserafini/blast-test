@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Dyrynda\Database\Support\CascadeSoftDeletes;
 
+use App\Models\User;
+
 class Customer extends Model
 {
     use HasFactory, SoftDeletes, CascadeSoftDeletes;
@@ -40,6 +42,11 @@ class Customer extends Model
     public function numbers() 
     {
         return $this->hasMany(Number::class);
+    }
+
+    public function user ()
+    {
+        return $this->belongsTo(User::class);
     }
 
     public function getStatusAttribute($attribute) 
