@@ -49,7 +49,6 @@ class CustomersController extends Controller
 
     public function edit(Customer $customer) 
     {
-        //$companies = Company::all();
         return view('customers.edit', compact('customer'));
     }
 
@@ -58,8 +57,6 @@ class CustomersController extends Controller
         $data = $this->getValidateRequest($request);
 
         $customer->update($data);
-
-        //session()->flash('success', 'Customer was updated!!!');
 
         return redirect('customers/' . $customer->id)->with('success', 'Customer updated successfully!');
     }
