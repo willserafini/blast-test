@@ -22,22 +22,10 @@ class CustomerFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => \App\Models\User::inRandomOrder()->first()->id,
+            'user_id' => \App\Models\User::factory(),
             'name' => $this->faker->name(),
             'document' => $this->faker->randomNumber(8),
             'status' => $this->faker->numberBetween(1, 4),
         ];
-    }
-
-    public function configure()
-    {
-        return $this->afterCreating(function (Customer $customer) {
-            \App\Models\Number::factory()
-                ->state([
-                    'customer_id' => $customer->id,
-                ])
-                ->count(rand(1, 10))
-                ->create();
-        });
     }
 }
