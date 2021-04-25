@@ -28,12 +28,4 @@ class NumberFactory extends Factory
         ];
     }
 
-    public function configure()
-    {
-        return $this->afterCreating(function (Number $number) {
-            event( new \App\Events\NewNumberEvent($number) );
-        });
-    }
-
-
 }

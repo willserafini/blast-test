@@ -23,6 +23,10 @@ class Number extends Model
         'status' => 1
     ];
 
+    protected $dispatchesEvents = [
+        'created' => \App\Events\NewNumberEvent::class
+    ];
+
     public function costumer() 
     {
         return $this->belongsTo(Customer::class, 'customer_id');

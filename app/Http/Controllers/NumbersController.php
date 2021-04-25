@@ -56,12 +56,10 @@ class NumbersController extends Controller
     {       
         $data = $this->getValidateRequest($request);
         try {
-            DB::beginTransaction();           
-
+            DB::beginTransaction();
+            
             $number = Number::create($data);
             
-            event( new NewNumberEvent($number) );
-
             DB::commit();
 
             return redirect('numbers')->with('success', 'Number created successfully!');
