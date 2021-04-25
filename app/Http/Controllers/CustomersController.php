@@ -75,7 +75,7 @@ class CustomersController extends Controller
     {
         return $request->validate([
             'name'     => 'required|min:3',
-            'document' => 'required|min:3|max:12',
+            'document' => 'required|min:6|max:12',
             'status'   => 'required',
         ]);
     }
