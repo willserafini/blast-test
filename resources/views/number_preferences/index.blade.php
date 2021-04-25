@@ -13,7 +13,8 @@
 
     <form class="form-inline" method="GET">
         <div class="form-group mb-2">
-            <input type="text" class="form-control" id="number" name="number" placeholder="Number..." value="{{ $filter['number'] ?? '' }}">          
+            <input type="text" class="form-control mr-2" id="customer_name" name="customer_name" placeholder="Customer..." value="{{ $filter['customer_name'] ?? '' }}">
+            <input type="text" class="form-control" id="number" name="number" placeholder="Number..." value="{{ $filter['number'] ?? '' }}">            
         </div>
         
         <button type="submit" class="btn btn-outline-primary mb-2 ml-2">Filter</button>

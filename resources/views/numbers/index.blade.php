@@ -13,11 +13,11 @@
 
     <form class="form-inline" method="GET">
         <div class="form-group mb-2">
-          <label for="number" class="col-form-label mr-2">Number</label>
-          <input type="text" class="form-control" id="number" name="number" placeholder="Number..." value="{{$filter}}">
+            <input type="text" class="form-control mr-2" id="customer_name" name="customer_name" placeholder="Customer..." value="{{ $filter['customer_name'] ?? '' }}">
+            <input type="text" class="form-control" id="number" name="number" placeholder="Number..." value="{{ $filter['number'] ?? '' }}">            
         </div>
         
-        <button type="submit" class="btn btn-secondary mb-2 ml-2">Filter</button>
+        <button type="submit" class="btn btn-outline-primary mb-2 ml-2">Filter</button>
     </form>
 
     <div class="container mt-5">
@@ -60,11 +60,9 @@
             
         </div>
 
-    <div class="d-flex justify-content-center">        
-        Displaying {{$numbers->count()}} of {{ $numbers->total() }} number(s).       
-    </div>
-
-        
+        <div class="d-flex justify-content-center">        
+            Displaying {{$numbers->count()}} of {{ $numbers->total() }} number(s).       
+        </div>
 
     </div>
 

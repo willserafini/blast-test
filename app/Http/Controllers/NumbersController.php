@@ -21,14 +21,19 @@ class NumbersController extends Controller
      */
     public function index(Request $request)
     {
-        $filter = $request->query('number');
+        $filter = $request->query();
+        $query = Number::select('numbers.*')
+            ->join('customers', 'customers.id', '=', 'numbers.customer_id');
 
-        if (!empty($filter)) {
-            $numbers = Number::where('number','LIKE','%' . $filter . '%')
-                ->paginate(10);
-        } else {
-            $numbers = Number::paginate(10);
+        if (!empty($filter['number'])) {
+            $query->where('numbers.number', 'LIKE', '%' . $filter['number'] . '%');
         }
+
+        if (!empty($filter['customer_name'])) {
+            $query->where('customers.name', 'ILIKE', '%' . $filter['customer_name'] . '%');
+        }
+    
+        $numbers = $query->orderBy('numbers.created_at', 'desc')->paginate(10);
     
         return view('numbers.index', compact('numbers', 'filter'));
     }

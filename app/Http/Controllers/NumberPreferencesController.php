@@ -18,18 +18,19 @@ class NumberPreferencesController extends Controller
     public function index(Request $request)
     {
         $filter = $request->query();
-        //dd($filter);
+        $query = NumberPreference::select('number_preferences.*')
+            ->join('numbers', 'numbers.id', '=', 'number_preferences.number_id')
+            ->join('customers', 'customers.id', '=', 'numbers.customer_id');
 
-        //$numberPreferences = NumberPreference::query();
         if (!empty($filter['number'])) {
-                $numberPreferences = NumberPreference::whereHas('number', function (Builder $query) use ($filter) {
-                    $query->where('number', 'LIKE', '%' . $filter['number'] . '%');
-                })
-                ->paginate(10);
-        } else {
-            $numberPreferences = NumberPreference::paginate(10);
+            $query->where('numbers.number', 'LIKE', '%' . $filter['number'] . '%');
+        }
+
+        if (!empty($filter['customer_name'])) {
+            $query->where('customers.name', 'ILIKE', '%' . $filter['customer_name'] . '%');
         }
     
+        $numberPreferences = $query->orderBy('number_preferences.created_at', 'desc')->paginate(10);
         return view('number_preferences.index', compact('numberPreferences', 'filter'));
     }
 

@@ -11,18 +11,22 @@ use Illuminate\Support\Facades\Auth;
 class CustomersController extends Controller
 {
 
-    public function index() 
+    public function index(Request $request) 
     {
-        $customers = Customer::all();
+        $filter = $request->query();
+        $query = Customer::select('customers.*');
 
-        //dd($customers);
+        if (!empty($filter['customer_name'])) {
+            $query->where('customers.name', 'ILIKE', '%' . $filter['customer_name'] . '%');
+        }
     
-        return view('customers.index', compact('customers'));
+        $customers = $query->orderBy('customers.created_at', 'desc')->paginate(10);
+    
+        return view('customers.index', compact('customers', 'filter'));
     }
 
     public function create() 
     {
-        //$companies = Company::all();
         $customer = new Customer();
     
         return view('customers.create', compact('customer'));
