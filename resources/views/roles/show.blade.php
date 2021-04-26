@@ -34,9 +34,9 @@
 
     <h3>Permissions</h3>
     <div class="row">        
-        <ul class="list-group list-group-horizontal">
+        <ul>
             @foreach ($role->permissions as $permission)
-                <li class="list-group-item list-group-item-dark">{{ $permission->name }}</li>
+                <li>{{ $permission->name }}</li>
             @endforeach        
         </ul>
     </div>

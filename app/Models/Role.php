@@ -23,6 +23,10 @@ class Role extends Model
 
     public function getIsAdminAttribute($attribute)
     {
+        if (!isset($attribute)) {
+            return '';
+        }
+
         return self::getOptionsIsAdmin()[$attribute];
     }
 

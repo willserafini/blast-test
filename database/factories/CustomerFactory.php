@@ -21,8 +21,13 @@ class CustomerFactory extends Factory
      */
     public function definition()
     {
+        $user = \App\Models\User::find(1);
+        if (!$user) {
+            $user = \App\Models\User::factory();
+        }
+        
         return [
-            'user_id' => \App\Models\User::factory(),
+            'user_id' => $user,
             'name' => $this->faker->name(),
             'document' => $this->faker->randomNumber(8),
             'status' => $this->faker->numberBetween(1, 4),
