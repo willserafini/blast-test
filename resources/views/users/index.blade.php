@@ -45,7 +45,7 @@
         </table>
 
         <div class="d-flex justify-content-center">
-            {!! $users->links() !!}
+            {!! $users->appends(request()->except('page'))->links() !!}
             <br />            
         </div>
 

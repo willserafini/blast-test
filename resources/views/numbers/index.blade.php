@@ -54,7 +54,7 @@
         </table>
 
         <div class="d-flex justify-content-center">
-            {!! $numbers->links() !!}
+            {!! $numbers->appends(request()->except('page'))->links() !!}
 
             <br />
             

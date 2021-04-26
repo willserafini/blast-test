@@ -43,7 +43,7 @@
         </table>
 
         <div class="d-flex justify-content-center">
-            {!! $roles->links() !!}
+            {!! $roles->appends(request()->except('page'))->links() !!}
 
             <br />
             

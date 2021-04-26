@@ -65,7 +65,7 @@
         </table>
 
         <div class="d-flex justify-content-center">
-            {!! $customers->links() !!}
+            {!! $customers->appends(request()->except('page'))->links() !!}
             <br />            
         </div>
 
