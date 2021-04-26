@@ -46,6 +46,11 @@ class Number extends Model
         return $this->getStatusOptions()[$attribute];
     }
 
+    public function getCustomerAndNumberAttribute($attribute)
+    {
+        return $this->costumer->name . ' / ' . $this->number;
+    }
+
     public function getStatusOptions() 
     {
         return [
