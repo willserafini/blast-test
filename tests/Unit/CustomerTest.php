@@ -20,18 +20,4 @@ class CustomerTest extends TestCase
 
         $this->assertCount(1, Customer::all());
     }
-
-    /** @test */
-    public function name_is_required_for_costumer()
-    {
-        $customer = Customer::factory()->make()->getAttributes();
-
-        $customer['name'] = '';
-
-        Customer::create($customer);
-
-        dd(Customer::first());
-
-        $this->assertCount(0, Customer::all());
-    }
 }

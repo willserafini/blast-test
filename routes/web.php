@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomersController;
 use App\Http\Controllers\NumbersController;
 use App\Http\Controllers\NumberPreferencesController;
+use App\Http\Controllers\UsersController;
+use App\Http\Controllers\RolesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,7 +38,9 @@ Route::delete('customers/{customer}', [CustomersController::class, 'destroy']);
 Route::resource('customers', CustomersController::class);
 Route::resource('numbers', NumbersController::class);
 Route::resource('number_preferences', NumberPreferencesController::class);
+Route::resource('users', UsersController::class);
+Route::resource('roles', RolesController::class);
 
-Auth::routes();
+Auth::routes(['register' => false]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

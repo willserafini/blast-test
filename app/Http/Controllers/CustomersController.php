@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Customer;
-//use App\Models\Company;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -13,6 +12,8 @@ class CustomersController extends Controller
 
     public function index(Request $request) 
     {
+        $this->authorize('viewAny', Customer::class);
+
         $filter = $request->query();
         $query = Customer::select('customers.*');
 
@@ -27,6 +28,7 @@ class CustomersController extends Controller
 
     public function create() 
     {
+        $this->authorize('create', Customer::class);
         $customer = new Customer();
     
         return view('customers.create', compact('customer'));
@@ -34,6 +36,8 @@ class CustomersController extends Controller
 
     public function store(Request $request) 
     {
+        $this->authorize('create', Customer::class);
+
         $data = $this->getValidateRequest($request);
 
         $data['user_id'] = Auth::id();
@@ -44,20 +48,23 @@ class CustomersController extends Controller
     }
 
     public function show(Customer $customer) 
-    {
-        
-        //$customer = Customer::where('id', $customer)->firstOrFail();
+    {        
+        $this->authorize('view', $customer);
 
         return view('customers.show', compact('customer'));
     }
 
     public function edit(Customer $customer) 
     {
+        $this->authorize('update', $customer);
+
         return view('customers.edit', compact('customer'));
     }
 
     public function update(Request $request, Customer $customer) 
     {
+        $this->authorize('update', $customer);
+
         $data = $this->getValidateRequest($request);
 
         $customer->update($data);
@@ -67,6 +74,7 @@ class CustomersController extends Controller
 
     public function destroy(Customer $customer)
     {
+        $this->authorize('delete', $customer);
         $customer->delete();
 
         return redirect('customers')->with('success', 'Customer deleted successfully!');

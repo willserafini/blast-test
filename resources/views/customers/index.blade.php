@@ -7,7 +7,10 @@
     <div class="row mb-4">
         <div class="col-12">
             <h1>Customers</h1>
-            <a href="{{ route('customers.create') }}"><button type="button" class="btn btn-success px-3">New</button></a>
+            @can('create', \App\Models\Customer::class)
+                <a href="{{ route('customers.create') }}"><button type="button" class="btn btn-success px-3">New</button></a>
+            @endcan
+            
         </div>
     </div>
 
@@ -39,14 +42,22 @@
                     <td>{{ $customer->document }}</td>
                     <td>{{ $customer->status }}</td>
                     <td> 
+                        @can('view', $customer)
                         <a class="btn btn-sm btn-primary" href="/customers/{{ $customer->id }}">View</a> 
+                        @endcan
+                        
+                        @can('update', $customer)
                         <a class="btn btn-sm btn-success" href="{{ route('customers.edit', ['customer' => $customer]) }}">Edit</a>
+                        @endcan
+
+                        @can('delete', $customer)
                         <form style="display:inline-block" action="{{ route('customers.destroy', ['customer' => $customer]) }}" method="POST">
                             @method('DELETE')
                             
                             <button class="btn btn-sm btn-danger">Delete</button>
                             @csrf
                         </form>
+                        @endcan
                     </td>
                 </tr>
                 @endforeach

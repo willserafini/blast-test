@@ -9,16 +9,24 @@
             <h1>Customer details</h1>
               
             <div class="btn-group" role="group">
-                <a href="{{ route('customers.index') }}"><button type="button" class="btn btn-primary">Costumers List</button></a>
-                <a href="{{ route('customers.edit', ['customer' => $customer]) }}">
-                    <button type="button" class="btn btn-primary mx-2">Edit</button>
-                </a>
-                <form action="{{ route('customers.destroy', ['customer' => $customer]) }}" method="POST">
-                    @method('DELETE')
-                    
-                    <button type="submit" class="btn btn-danger">Delete</button>
-                    @csrf
-                </form>
+                @can('viewAny', $customer)
+                    <a href="{{ route('customers.index') }}"><button type="button" class="btn btn-primary">Costumers List</button></a>
+                @endcan
+
+                @can('update', $customer)
+                    <a href="{{ route('customers.edit', ['customer' => $customer]) }}">
+                        <button type="button" class="btn btn-primary mx-2">Edit</button>
+                    </a>
+                @endcan
+
+                @can('delete', $customer)
+                    <form action="{{ route('customers.destroy', ['customer' => $customer]) }}" method="POST">
+                        @method('DELETE')
+                        
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                        @csrf
+                    </form>
+                @endcan
             </div> 
 
         </div>

@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+use App\Models\Role;
+
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
@@ -20,6 +22,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role_id'
     ];
 
     /**
@@ -40,4 +43,18 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function role() {
+        return $this->belongsTo(Role::class);
+    }
+
+    public function hasPermission($permissionName)
+    {
+        return $this->role->permissions()->where('name', $permissionName)->exists();
+    }
+
+    public function isAdmin()
+    {
+        return $this->role->getAttributes()['is_admin'];
+    }
 }
