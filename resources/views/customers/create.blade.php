@@ -17,7 +17,10 @@
                 
                 @include('customers.form')
         
-                <button type="submit" class="btn btn-primary">Add Customer</button>        
+                <button type="submit" class="btn btn-primary">Add Customer</button>
+                
+                <button type="submit" name="add_customer_and_number" value="1" class="btn btn-success">Add Customer + Create Number</button>  
+                
                 
             </form>
         </div>

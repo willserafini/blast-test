@@ -44,6 +44,10 @@ class NumberPreferencesController extends Controller
         $numberPreference = new NumberPreference();
         $numbers = Number::all();
 
+        if (isset(request()->query()['numberId'])) {
+            $numberPreference->number_id = request()->query()['numberId'];
+        }
+
         return view('number_preferences.create', compact('numberPreference', 'numbers'));
 
     }

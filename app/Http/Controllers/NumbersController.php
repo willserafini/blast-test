@@ -46,7 +46,11 @@ class NumbersController extends Controller
     public function create()
     {
         $number = new Number();
-        $costumers = Customer::all();       
+        if (isset(request()->query()['customerId'])) {
+            $number->customer_id = request()->query()['customerId'];
+        }
+
+        $costumers = Customer::all();
     
         return view('numbers.create', compact('number', 'costumers'));
     }
@@ -66,6 +70,10 @@ class NumbersController extends Controller
             $number = Number::create($data);
             
             DB::commit();
+
+            if ($request->input('add_number_and_pref')) {
+                return redirect('number_preferences/create?numberId=' . $number->id)->with('success', 'Number created successfully!');
+            }
 
             return redirect('numbers')->with('success', 'Number created successfully!');
         } catch (\Exception $e) {

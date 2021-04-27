@@ -2,7 +2,7 @@
     <span class="form-group-text" id="basic-addon1">Number</span>
     <select name="number_id" id="number_id" class="form-control">
         @foreach ($numbers as $number)
-            <option value="{{ $number->id }}">{{ $number->customer_and_number }}</option>
+            <option value="{{ $number->id }}" {{ $numberPreference->number_id == $number->id ? 'selected' : '' }}>{{ $number->customer_and_number }}</option>
         @endforeach                        
     </select>
 </div>

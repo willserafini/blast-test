@@ -1,26 +1,23 @@
 @extends('layouts.app')
 
+@section('title', 'Home')
+
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    <div class="aling-center">
-                        Sistema usando o framework Laravel 8.38.0 
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
+<div class="container h-100">
+    <div class="d-flex justify-content-center">  
+        <h3>Welcome to the Laravel Project!</h3>
     </div>
+    
+    @guest
+    <div class="d-flex justify-content-center">  
+        If you want to access the system you will need to login first.  
+    </div>
+    
+    <div class="d-flex justify-content-center mt-3">  
+        <a class="btn btn-primary btn-lg" href="{{ route('login') }}"> Login page</a>
+    </div>
+    @endguest
 </div>
+    
 @endsection

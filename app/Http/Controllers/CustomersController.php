@@ -52,7 +52,11 @@ class CustomersController extends Controller
 
         $data['user_id'] = Auth::id();
 
-        Customer::create($data);
+        $customer = Customer::create($data);
+
+        if ($request->input('add_customer_and_number')) {
+            return redirect('numbers/create?customerId=' . $customer->id)->with('success', 'Customer created successfully!');
+        }
 
         return redirect('customers')->with('success', 'Customer created successfully!');
     }

@@ -2,7 +2,7 @@
     <span class="form-group-text" id="basic-addon1">Costumer</span>
     <select name="customer_id" id="customer_id" class="form-control">
         @foreach ($costumers as $costumer)
-            <option value="{{ $costumer->id }}">{{ $costumer->name }}</option>
+            <option value="{{ $costumer->id }}" {{ $number->customer_id == $costumer->id ? 'selected' : '' }}>{{ $costumer->name }}</option>
         @endforeach                        
     </select>
 </div>

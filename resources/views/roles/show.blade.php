@@ -33,7 +33,7 @@
 
 
     <h3>Permissions</h3>
-    <div class="row">        
+    <div class="row ml-3">        
         <ul>
             @foreach ($role->permissions as $permission)
                 <li>{{ $permission->name }}</li>

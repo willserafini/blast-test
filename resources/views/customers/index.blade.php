@@ -54,6 +54,9 @@
                             <a class="btn btn-sm btn-secondary" href="{{ route('customers.view_permissions', ['customer' => $customer]) }}">Multiple Users</a>
                         @endcan
 
+                        <a class="btn btn-sm btn-dark" href="{{ route('numbers.create', ['customerId' => $customer->id]) }}">New number</a>
+                        
+
                         @can('delete', $customer)
                         <form style="display:inline-block" action="{{ route('customers.destroy', ['customer' => $customer]) }}" method="POST">
                             @method('DELETE')

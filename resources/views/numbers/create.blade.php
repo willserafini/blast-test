@@ -17,7 +17,9 @@
                 
                 @include('numbers.form')
         
-                <button type="submit" class="btn btn-primary">Add Number</button>        
+                <button type="submit" class="btn btn-primary">Add Number</button>  
+                
+                <button type="submit" name="add_number_and_pref" value="1" class="btn btn-success">Add Number + Create Preference</button>  
                 
             </form>
         </div>

@@ -48,7 +48,7 @@
     </div>
 
     <h3>Another users who can see this account</h3>
-    <div class="row">        
+    <div class="row ml-3">        
         <ul>
             @foreach ($customer->getUsersCanSee() as $user)
                 <li>{{ $user->name }}</li>

@@ -41,6 +41,7 @@
                     <td> 
                         <a class="btn btn-sm btn-primary" href="/numbers/{{ $number->id }}">View</a> 
                         <a class="btn btn-sm btn-success" href="{{ route('numbers.edit', ['number' => $number]) }}">Edit</a>
+                        <a class="btn btn-sm btn-dark" href="{{ route('number_preferences.create', ['number_id' => $number->id]) }}">New preference</a>
                         <form style="display:inline-block" action="{{ route('numbers.destroy', ['number' => $number]) }}" method="POST">
                             @method('DELETE')
                             
