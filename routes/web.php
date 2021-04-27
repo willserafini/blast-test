@@ -41,6 +41,10 @@ Route::resource('number_preferences', NumberPreferencesController::class);
 Route::resource('users', UsersController::class);
 Route::resource('roles', RolesController::class);
 
+
+Route::get('customers/{customer}/permissions', [CustomersController::class, 'viewPermissions'])->name('customers.view_permissions');
+Route::patch('customers/permissions/{customer}', [CustomersController::class, 'updatePermissions'])->name('customers.update_permissions');
+
 Auth::routes(['register' => false]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

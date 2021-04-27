@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Customer;
+use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -14,14 +16,22 @@ class CustomersController extends Controller
     {
         $this->authorize('viewAny', Customer::class);
 
+        //DB::enableQueryLog();
         $filter = $request->query();
         $query = Customer::select('customers.*');
 
+        if (!Auth::user()->isAdmin()) {
+            $query->where('customers.user_id', Auth::id())
+                ->orWhereJsonContains('customers.permissions->users', Auth::id());
+        }
+        
         if (!empty($filter['customer_name'])) {
             $query->where('customers.name', 'ILIKE', '%' . $filter['customer_name'] . '%');
         }
     
         $customers = $query->orderBy('customers.created_at', 'desc')->paginate(10);
+
+        //dd(DB::getQueryLog());
     
         return view('customers.index', compact('customers', 'filter'));
     }
@@ -78,6 +88,29 @@ class CustomersController extends Controller
         $customer->delete();
 
         return redirect('customers')->with('success', 'Customer deleted successfully!');
+    }
+
+    public function viewPermissions(Customer $customer)
+    {
+        $users = User::all();
+        return view('customers.view_permissions', compact('customer', 'users'));
+    }
+
+    public function updatePermissions(Request $request, Customer $customer) 
+    {
+        $this->authorize('update', $customer);
+        
+        $data = $request->validate([
+            'permissions' => 'nullable'
+        ]);
+
+        if (!isset($data['permissions'])) {
+            $data['permissions'] = null;
+        }
+
+        $customer->update($data);
+
+        return redirect('customers/' . $customer->id)->with('success', 'Customer updated successfully!');
     }
 
     private function getValidateRequest(Request $request) 

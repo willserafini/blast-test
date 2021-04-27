@@ -30,6 +30,10 @@ class CustomerPolicy
      */
     public function view(User $user, Customer $customer)
     {
+        if (!$customer->userIsAllowed($user)) {
+            return false;
+        }
+
         return $user->hasPermission('show-customer');
     }
 
@@ -53,6 +57,10 @@ class CustomerPolicy
      */
     public function update(User $user, Customer $customer)
     {
+        if (!$customer->userIsAllowed($user)) {
+            return false;
+        }
+
         return $user->hasPermission('edit-customer');
     }
 
@@ -65,6 +73,10 @@ class CustomerPolicy
      */
     public function delete(User $user, Customer $customer)
     {
+        if (!$customer->userIsAllowed($user)) {
+            return false;
+        }
+        
         return $user->hasPermission('delete-customer');
     }
 

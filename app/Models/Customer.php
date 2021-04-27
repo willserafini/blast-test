@@ -25,6 +25,10 @@ class Customer extends Model
         'status' => 1
     ];
 
+    protected $casts = [
+        'permissions' => 'array'
+    ];
+
     protected $cascadeDeletes = ['numbers'];
 
     /*public function scopeActive($query) {
@@ -56,6 +60,50 @@ class Customer extends Model
         }
 
         return $this->getStatusOptions()[$attribute];
+    }
+
+    public function getUsersCanSee()
+    {
+        if (empty($this->permissions)) {
+            return [];
+        }
+        
+        return User::whereIn('id', $this->permissions['users'])->get();
+    }
+
+    public function userIsAllowed($user)
+    {
+        if ($this->user_id == \Illuminate\Support\Facades\Auth::id()) {
+            return true;
+        }
+
+        if (empty($this->permissions)) {
+            return false;
+        }
+
+        return in_array($user->id, $this->permissions['users']);
+    }
+
+    public function setPermissionsAttribute($permissions)
+    {
+        if (!$permissions) {
+            return $this->attributes['permissions'] = null;
+        }
+
+        foreach ($permissions['users'] as $key => $user_id) {
+            $permissions['users'][$key] = (int) $user_id;
+        }
+
+        $this->attributes['permissions'] = json_encode($permissions, JSON_ERROR_NONE);
+    }
+
+    public function userIsInPermissions($user)
+    {
+        if (empty($this->permissions)) {
+            return false;
+        }
+
+        return in_array($user->id, $this->permissions['users']);
     }
 
     public function getStatusOptions() 

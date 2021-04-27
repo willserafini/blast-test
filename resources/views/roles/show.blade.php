@@ -11,7 +11,7 @@
             <div class="btn-group" role="group">
                 <a href="{{ route('roles.index') }}"><button type="button" class="btn btn-primary">Roles List</button></a>
                 <a href="{{ route('roles.edit', ['role' => $role]) }}">
-                    <button type="button" class="btn btn-primary mx-2">Edit</button>
+                    <button type="button" class="btn btn-success mx-2">Edit</button>
                 </a>
                 <form action="{{ route('roles.destroy', ['role' => $role]) }}" method="POST">
                     @method('DELETE')

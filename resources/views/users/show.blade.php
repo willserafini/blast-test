@@ -11,7 +11,7 @@
             <div class="btn-group" role="group">
                 <a href="{{ route('users.index') }}"><button type="button" class="btn btn-primary">User List</button></a>
                 <a href="{{ route('users.edit', ['user' => $user]) }}">
-                    <button type="button" class="btn btn-primary mx-2">Edit</button>
+                    <button type="button" class="btn btn-success mx-2">Edit</button>
                 </a>
                 <form action="{{ route('users.destroy', ['user' => $user]) }}" method="POST">
                     @method('DELETE')

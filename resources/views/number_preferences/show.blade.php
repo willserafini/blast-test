@@ -11,7 +11,7 @@
             <div class="btn-group" role="group">
                 <a href="{{ route('number_preferences.index') }}"><button type="button" class="btn btn-primary">Preference List</button></a>
                 <a href="{{ route('number_preferences.edit', ['number_preference' => $numberPreference]) }}">
-                    <button type="button" class="btn btn-primary mx-2">Edit</button>
+                    <button type="button" class="btn btn-success mx-2">Edit</button>
                 </a>
                 <form action="{{ route('number_preferences.destroy', ['number_preference' => $numberPreference]) }}" method="POST">
                     @method('DELETE')

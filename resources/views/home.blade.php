@@ -14,8 +14,8 @@
                         </div>
                     @endif
 
-                    <div class="">
-                        Hello 
+                    <div class="aling-center">
+                        Sistema usando o framework Laravel 8.38.0 
                     </div>
                     
                 </div>

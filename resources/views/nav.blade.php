@@ -9,10 +9,14 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
+            @auth
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('customers.index') }}">Customers</a>
-                </li>
+                @can('viewAny', \App\Models\Customer::class)
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('customers.index') }}">Customers</a>
+                    </li>
+                @endcan
+                
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('numbers.index') }}">Numbers</a>
                 </li>
@@ -20,15 +24,18 @@
                     <a class="nav-link" href="{{ route('number_preferences.index') }}">Preferences</a>
                 </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('users.index') }}">Users</a>
-                </li>
+                @if(Auth::user()->isAdmin())
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('users.index') }}">Users</a>
+                    </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('roles.index') }}">Roles</a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('roles.index') }}">Roles</a>
+                    </li>
+                @endif
                 
             </ul>
+            @endauth
 
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">

@@ -43,11 +43,15 @@
                     <td>{{ $customer->status }}</td>
                     <td> 
                         @can('view', $customer)
-                        <a class="btn btn-sm btn-primary" href="/customers/{{ $customer->id }}">View</a> 
+                            <a class="btn btn-sm btn-primary" href="/customers/{{ $customer->id }}">View</a> 
                         @endcan
                         
                         @can('update', $customer)
-                        <a class="btn btn-sm btn-success" href="{{ route('customers.edit', ['customer' => $customer]) }}">Edit</a>
+                            <a class="btn btn-sm btn-success" href="{{ route('customers.edit', ['customer' => $customer]) }}">Edit</a>
+                        @endcan
+
+                        @can('update', $customer)
+                            <a class="btn btn-sm btn-secondary" href="{{ route('customers.view_permissions', ['customer' => $customer]) }}">Multiple Users</a>
                         @endcan
 
                         @can('delete', $customer)
