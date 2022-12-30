@@ -1,4 +1,4 @@
-Laravel Project
+Blast Test Project
 ====================
 
 **Technologies used:**
